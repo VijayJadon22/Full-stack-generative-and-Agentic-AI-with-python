@@ -16,5 +16,6 @@ print("Available flavors ",flavors)
 
 while (flavor := input("Choose the flavor: ")) not in flavors:
     print(f"Sorry {flavor} is not available")
+    
 print(f"You choose {flavor} chai")
 
