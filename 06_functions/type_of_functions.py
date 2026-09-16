@@ -1,4 +1,4 @@
-def get_total(bill): #this is pure fucntion as it is not altering any gloabl variable
+def get_total(bill):  # this is pure fucntion as it is not altering any gloabl variable
     return bill + 10
 
 
@@ -8,7 +8,9 @@ print(total_Amount)
 initial_bill = 0
 
 
-def calculate_total(amount): #this is impure fucntion as it is altering gloabl variable
+def calculate_total(
+    amount,
+):  # this is impure fucntion as it is altering gloabl variable
     global initial_bill
     initial_bill = 40
     return amount + initial_bill
@@ -22,10 +24,21 @@ print(f"Inital bill: {initial_bill}")
 
 # Recursive Function
 
+
 def recursive_function(n):
-    if(n==0):
+    if n == 0:
         return "N value is 0"
     print(f"Value of n is: {n}")
-    return recursive_function(n-1)
+    return recursive_function(n - 1)
+
 
 recursive_function(5)
+
+# Lambda functions
+list_items = ["shirt", "tshirt", "pant", "tshirt"]
+
+new_list = list(filter(lambda item: item == "tshirt", list_items))
+unique_list = list(filter(lambda item: item != "tshirt", list_items))
+
+print(f"New list: {new_list}")
+print(f"unique list: {unique_list}")
