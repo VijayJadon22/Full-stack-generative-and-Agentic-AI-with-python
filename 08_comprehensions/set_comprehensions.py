@@ -15,3 +15,13 @@ print(unique_chai)
 desired_length = {chai for chai in menu if len(chai) > 10}
 
 print(desired_length)
+
+
+recipes = {
+    "masala chai": ["ginger", "elaichi", "masala"],
+    "elaichi chai": ["milk", "elaichi"],
+    "lemon chai": ["lemon", "milk"],
+}
+
+unique_spices = {spice for ingredients in recipes.values() for spice in ingredients}
+print(unique_spices)
