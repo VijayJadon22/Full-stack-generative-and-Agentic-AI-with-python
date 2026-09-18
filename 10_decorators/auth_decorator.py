@@ -6,7 +6,7 @@ def require_admin(func):
     def wrapper(user_role):
         if user_role != "admin":
             print("Access denied, admins only!")
-
+            return None
         else:
             return func(user_role)
 
