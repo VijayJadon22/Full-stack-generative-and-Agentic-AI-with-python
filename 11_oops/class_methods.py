@@ -18,6 +18,12 @@ class ChaiOrder:
         return cls(tea_type, sweetness, size)
 
 
+class ChaiUtils:
+    @staticmethod
+    def is_valid_size(size):
+        return size in ["small", "medium", "large"]
+
+
 order1 = ChaiOrder.from_dict(
     {"tea_type": "Masala", "sweetness": "strong", "size": "small"}
 )
@@ -26,8 +32,13 @@ print(order1.tea_type, order1.sweetness, order1.size)
 order2 = ChaiOrder.from_string("Lemon-Strong-Big")
 print(order2.tea_type, order2.sweetness, order2.size)
 
-order3=ChaiOrder("Ginger","mild","medium")
+order3 = ChaiOrder("Ginger", "mild", "medium")
 
 print(order1.__dict__)
 print(order2.__dict__)
 print(order3.__dict__)
+
+bigSize = ChaiUtils.is_valid_size("big")  # false
+print(f"Is Valid Size {bigSize}")
+largeSize = ChaiUtils.is_valid_size("large")  # true
+print(f"Is Valid Size {largeSize}")
