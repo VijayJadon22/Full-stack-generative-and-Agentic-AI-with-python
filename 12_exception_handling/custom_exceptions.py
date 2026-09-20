@@ -1,12 +1,10 @@
-def brew_chai(flavor):
-    try:
-        if flavor not in ["masala", "elaichi", "lemon"]:
-            raise ValueError(f"{flavor} chai not in stock")
-
-        print(f"{flavor} chai is preparing...")
-    except ValueError as e:
-        print("Value error:", e)
+class OutOfIngredientsError(Exception):
+    pass
 
 
-brew_chai("masala")
-brew_chai("ginger")  # Value error: ginger chai not in stock
+def make_tea(milk, sugar):
+    if milk == 0 or sugar == 0:
+        raise OutOfIngredientsError("Ingredients out of stock")
+    print("Making tea..")
+
+make_tea(0,2)
