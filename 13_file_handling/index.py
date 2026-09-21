@@ -1,6 +1,9 @@
-file = open("order.txt", "w")
+# file = open("order.txt", "w")
 
-try:
-    file.write("Masala chai - 2 cups")
-finally:
-    file.close()
+# try:
+#     file.write("Masala chai - 2 cups")
+# finally:
+#     file.close()
+
+with open("order.txt", "w") as file:
+    file.write("Masala tea - 4 cups")
