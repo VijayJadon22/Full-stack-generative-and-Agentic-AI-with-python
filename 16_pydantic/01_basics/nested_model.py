@@ -13,8 +13,19 @@ class User(BaseModel):
     name: str
     address: Address
 
-#First way of accessing the Models
-address = Address(street="ST Marg", city="Gwalior", postal_code="121001")
-user = User(id=12, name="Vijay Jadon", address=address)
 
+# First way of accessing the Models
+# address = Address(street="ST Marg", city="Gwalior", postal_code="121001")
+# user = User(id=12, name="Vijay Jadon", address=address)
+
+# print(user)
+
+# Second way of accessing the Models
+user_data = {
+    "id": 12,
+    "name": "Vijay Jadon",
+    "address": {"street": "ST Marg", "city": "Gwalior", "postal_code": "120001"},
+}
+
+user = User(**user_data)
 print(user)
