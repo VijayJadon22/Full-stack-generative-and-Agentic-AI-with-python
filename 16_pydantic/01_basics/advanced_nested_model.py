@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import Optional
+from typing import Optional, List, Union
 
 
 class Address(BaseModel):
@@ -29,12 +29,45 @@ class Employee(BaseModel):
 # user = Employee(**user_data)
 # print(user)
 
-user = Employee(
-    name="Vijay Jadon",
-    company=Company(
-        name="Google",
-        address=Address(street="ST Marg", city="Gwalior", postal_code="120011"),
-    ),
+# user = Employee(
+#     name="Vijay Jadon",
+#     company=Company(
+#         name="Google",
+#         address=Address(street="ST Marg", city="Gwalior", postal_code="120011"),
+#     ),
+# )
+
+# print(user)
+
+
+class TextContent(BaseModel):
+    type: str = "text"
+    content: str
+
+
+class ImageContent(BaseModel):
+    type: str = "Image"
+    url: str
+    alt_text: str
+
+
+class Article(BaseModel):
+    title: str
+    sections: List[Union[TextContent, ImageContent]]
+
+
+article1 = Article(
+    title="CJP Protest Restarts",
+    sections=[
+        TextContent(
+            type="Para about the protest", content="Detailed para about the protest"
+        ),
+        ImageContent(
+            type="Image uploaded",
+            url="https://example.com",
+            alt_text="Image related to article",
+        ),
+    ],
 )
 
-print(user)
+print(article1)
