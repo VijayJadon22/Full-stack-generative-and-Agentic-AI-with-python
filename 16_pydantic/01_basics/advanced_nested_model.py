@@ -71,3 +71,30 @@ article1 = Article(
 )
 
 print(article1)
+
+
+class Country(BaseModel):
+    name: str
+    code: str
+
+
+class State(BaseModel):
+    name: str
+    country: Country
+
+
+class City(BaseModel):
+    name: str
+    state: State
+
+
+class Address(BaseModel):
+    street: str
+    city: City
+    postal_code: str
+
+
+class Organization(BaseModel):
+    name: str
+    head_quarter: Address
+    branches: List[Address] = []
