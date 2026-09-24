@@ -18,13 +18,23 @@ class Employee(BaseModel):
     company: Optional[Company] = None
 
 
-user_data = {
-    "name": "Vijay Jadon",
-    "company": {
-        "name": "Google",
-        "address": {"street": "ST Marg", "city": "Gwalior", "postal_code": "120011"},
-    },
-}
+# user_data = {
+#     "name": "Vijay Jadon",
+#     "company": {
+#         "name": "Google",
+#         "address": {"street": "ST Marg", "city": "Gwalior", "postal_code": "120011"},
+#     },
+# }
 
-user = Employee(**user_data)
+# user = Employee(**user_data)
+# print(user)
+
+user = Employee(
+    name="Vijay Jadon",
+    company=Company(
+        name="Google",
+        address=Address(street="ST Marg", city="Gwalior", postal_code="120011"),
+    ),
+)
+
 print(user)
