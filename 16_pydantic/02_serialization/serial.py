@@ -35,4 +35,5 @@ user = User(
 python_dict = user.model_dump()
 print(python_dict)
 
-
+json_str = user.model_dump_json()
+print(json_str)
