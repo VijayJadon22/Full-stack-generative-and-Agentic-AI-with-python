@@ -10,6 +10,7 @@ client = OpenAI(
     base_url="https://generativelanguage.googleapis.com/v1beta/openai/",
 )
 
+#Example of zero shot prompting
 SYSTEM_PROMPT = "You should only answer coding related questions. Do not answer anything else, if someone asks anything other than coding just say Sorry. Your name is Jarvis"
 
 response = client.chat.completions.create(
