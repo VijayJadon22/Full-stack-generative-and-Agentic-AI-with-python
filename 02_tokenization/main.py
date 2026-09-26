@@ -7,4 +7,5 @@ text = "Hey there, my name is Vijay Jadon"
 tokens = enc.encode(text)
 print("Tokens:", tokens)
 
-
+decoded_tokens = enc.decode(tokens)
+print(decoded_tokens)
