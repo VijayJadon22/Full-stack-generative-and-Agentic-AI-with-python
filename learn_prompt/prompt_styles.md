@@ -86,3 +86,11 @@ Hey, can you solve 2 + 3 * 5 / 10
     "content": "3.5"
 }
 """
+
+
+##ChatML Style prompting which we were already using (OpenAI uses ChatML prompting)
+
+{
+    "role": "user" | "system" | "assistant",
+    "content": "string"
+}
