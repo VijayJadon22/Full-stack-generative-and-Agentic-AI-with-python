@@ -21,7 +21,7 @@ embedding_model = OpenAIEmbeddings(
 )
 
 # Vector DB
-vector_db = QdrantVectorStore(
+vector_db = QdrantVectorStore.from_existing_collection(
     url="http://localhost:6333",
     collection_name="learning_rag",
     embedding=embedding_model,
