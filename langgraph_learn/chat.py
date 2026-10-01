@@ -1,7 +1,19 @@
+from dotenv import load_dotenv
+import os
 from typing_extensions import TypedDict
 from typing import Annotated
 from langgraph.graph.message import add_messages
 from langgraph.graph import StateGraph, START, END
+from langchain.chat_models import init_chat_model
+
+load_dotenv()
+
+llm = init_chat_model(
+    model="gemini-3.5-flash-lite",
+    model_provider="openai",
+    api_key=os.getenv("GEMINI_API_KEY"),
+    base_url="https://generativelanguage.googleapis.com/v1beta/openai/",
+)
 
 
 class State(TypedDict):
@@ -9,8 +21,9 @@ class State(TypedDict):
 
 
 def chatbot(state: State):
-    print("\n\n Inside chatbot node, state: ", state)
-    return {"messages": ["Hi, this is a message from chatbot node"]}
+    # print("\n\n Inside chatbot node, state: ", state)
+    response = llm.invoke(state.get("messages"))
+    return {"messages": [response]}
 
 
 def samplenode(state: State):
