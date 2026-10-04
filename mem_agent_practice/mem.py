@@ -2,6 +2,7 @@ from dotenv import load_dotenv
 from openai import OpenAI
 import os
 from mem0 import Memory
+import json
 
 load_dotenv()
 
@@ -41,9 +42,26 @@ mem_client = Memory.from_config(config)
 while True:
     user_query = input("Enter your input: ")
 
+    search_memory = mem_client.search(
+        query=user_query, filters={"user_id": "vijayjadon"}, limit=1
+    )
+
+    memories = [
+        f"ID: {memory.get('id')}\nMemory: {memory.get('memory')}"
+        for memory in search_memory.get("results", [])
+    ]
+
+    SYSTEM_PROMPT = f"""
+        Here is the context about the user
+        {json.dumps(memories)}
+    """
+
     response = openai_client.chat.completions.create(
         model="gemini-3.5-flash-lite",
-        messages=[{"role": "user", "content": user_query}],
+        messages=[
+            {"role": "system", "content": SYSTEM_PROMPT},
+            {"role": "user", "content": user_query},
+        ],
     )
 
     ai_response = response.choices[0].message.content
