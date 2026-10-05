@@ -27,6 +27,14 @@ config = {
             "api_key": os.getenv("GEMINI_API_KEY"),
         },
     },
+    "graph_store": {
+        "provider": "neo4j",
+        "config": {
+            "url": os.getenv("NEO_CONNECTION_URI"),
+            "username": "neo4j",
+            "password": os.getenv("NEO_PASSWORD"),
+        },
+    },
     "vector_store": {
         "provider": "qdrant",
         "config": {
@@ -43,7 +51,7 @@ while True:
     user_query = input("Enter your input: ")
 
     search_memory = mem_client.search(
-        query=user_query, filters={"user_id": "vijayjadon"}, limit=1
+        query=user_query, filters={"user_id": "vijayjadon"}
     )
 
     memories = [
@@ -75,6 +83,6 @@ while True:
         ],
     )
 
-    print("Memory result:", result)
+    print(json.dumps(result, indent=2))
 
     print("Memory has been saved...")
