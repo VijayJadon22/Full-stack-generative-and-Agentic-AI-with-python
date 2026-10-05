@@ -1,7 +1,10 @@
+import asyncio
 from dotenv import load_dotenv
 import speech_recognition as sr
 from openai import OpenAI
 import os
+from openai import AsyncOpenAI
+from openai.helpers import LocalAudioPlayer
 
 load_dotenv()
 
@@ -9,6 +12,18 @@ openai_client = OpenAI(
     api_key=os.getenv("GEMINI_API_KEY"),
     base_url="https://generativelanguage.googleapis.com/v1beta/openai/",
 )
+async_client = AsyncOpenAI()
+
+
+async def tts(speech: str):
+    async with async_client.audio.speech.with_streaming_response.create(
+        model="gpt-4o-mini-tts",
+        voice="coral",
+        input=speech,
+        instructions="Speak in a cheerful and positive tone.",
+        response_format="pcm",
+    ) as response:
+        await LocalAudioPlayer().play(response)
 
 
 def main():
@@ -44,6 +59,8 @@ def main():
             )
 
             print("AI Response:", response.choices[0].message.content)
+
+            asyncio.run(tts(speech=response.choices[0].message.content))
 
     except sr.WaitTimeoutError:
         print("No speech detected within the timeout period.")
